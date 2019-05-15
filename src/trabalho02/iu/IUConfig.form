@@ -1,6 +1,6 @@
-<?xml version="1.1" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+<Form version="1.8" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.JTextField" name="jTextField3">
       <Properties>
@@ -14,6 +14,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -186,7 +187,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="livros_Text">
           <Properties>
-            <Property name="text" type="java.lang.String" value=".\livros.dat"/>
+            <Property name="text" type="java.lang.String" value=".\u005clivros.dat" containsInvalidXMLChars="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
@@ -196,7 +197,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="usuarios_Text">
           <Properties>
-            <Property name="text" type="java.lang.String" value=".\usuarios.dat"/>
+            <Property name="text" type="java.lang.String" value=".\u005cusuarios.dat" containsInvalidXMLChars="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
@@ -206,7 +207,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="emprestimos_Text">
           <Properties>
-            <Property name="text" type="java.lang.String" value=".\emprestimos.dat"/>
+            <Property name="text" type="java.lang.String" value=".\u005cemprestimos.dat" containsInvalidXMLChars="true"/>
           </Properties>
         </Component>
       </SubComponents>
