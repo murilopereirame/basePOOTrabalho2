@@ -5,6 +5,7 @@
 
 package trabalho02.modelo;
 
+import java.lang.IllegalArgumentException;
 import java.io.Serializable;
 
 /**
@@ -27,7 +28,10 @@ public class Usuario implements Serializable {
     }
 
     public void setDiasEmprestimo(int diasEmprestimo) {
-        this.diasEmprestimo = diasEmprestimo;
+        if(diasEmprestimo > 0 )
+            this.diasEmprestimo = diasEmprestimo;
+        else
+            throw new IllegalArgumentException("Os dias devem ser maiores do que zero!");
     }
 
     public String getCodUsuario() {
@@ -35,7 +39,10 @@ public class Usuario implements Serializable {
     }
 
     public void setCodUsuario(String codUsuario) {
-        this.codUsuario = codUsuario;
+        if(codUsuario != "")
+            this.codUsuario = codUsuario;
+        else
+            throw new IllegalArgumentException("O códig")
     }
 
     public String getNome() {
