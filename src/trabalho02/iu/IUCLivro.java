@@ -5,17 +5,22 @@
  */
 package trabalho02.iu;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import trabalho02.modelo.Biblioteca;
+
 /**
  *
  * @author WILLIANSOTOCORNOMEND
  */
 public class IUCLivro extends javax.swing.JDialog {
-
+    private Biblioteca bibli;
     /**
      * Creates new form IUCLivro
      */
-    public IUCLivro(java.awt.Frame parent, boolean modal) {
+    public IUCLivro(java.awt.Frame parent, boolean modal, Biblioteca bibli) {
         super(parent, modal);
+        this.bibli = bibli;
         initComponents();
     }
 
@@ -153,13 +158,13 @@ public class IUCLivro extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
-        if(this.jTextField1.getText().equals("Insira o curso do aluno"))
+        if(this.jTextField1.getText().equals("Insira o nome do livro"))
         this.jTextField1.setText("");
     }//GEN-LAST:event_jTextField1FocusGained
 
     private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
         if(this.jTextField1.getText().equals(""))
-        this.jTextField1.setText("Insira o curso do aluno");
+        this.jTextField1.setText("Insira o nome do livro");
     }//GEN-LAST:event_jTextField1FocusLost
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -168,13 +173,13 @@ public class IUCLivro extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusGained
-        if(this.jTextField2.getText().equals("Insira o nome do aluno"))
+        if(this.jTextField2.getText().equals("Insira o código"))
         this.jTextField2.setText("");
     }//GEN-LAST:event_jTextField2FocusGained
 
     private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
         if(this.jTextField2.getText().equals(""))
-        this.jTextField2.setText("Insira o nome do aluno");
+        this.jTextField2.setText("Insira o código");
     }//GEN-LAST:event_jTextField2FocusLost
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -183,7 +188,8 @@ public class IUCLivro extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        cadastrarLivro();
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -220,7 +226,7 @@ public class IUCLivro extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                IUCLivro dialog = new IUCLivro(new javax.swing.JFrame(), true);
+                IUCLivro dialog = new IUCLivro(new javax.swing.JFrame(), true, new Biblioteca());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -230,6 +236,11 @@ public class IUCLivro extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
+    }
+    
+    private void cadastrarLivro(){
+        if(this.bibli.addLivro(jTextField2.getText(), jTextField1.getText(), Integer.parseInt(String.valueOf(jSpinner1.getValue()))))
+            JOptionPane.showMessageDialog(null, "Livro inserido com sucesso!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -11,7 +11,9 @@
 package trabalho02.iu;
 
 import trabalho02.controlador.Controlador;
+import trabalho02.modelo.Aluno;
 import trabalho02.modelo.Biblioteca;
+import trabalho02.modelo.Professor;
 
 /**
  *
@@ -33,6 +35,8 @@ public class IUPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -63,10 +67,19 @@ public class IUPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setDisabledTextColor(new java.awt.Color(191, 186, 186));
+        jScrollPane1.setViewportView(jTextArea1);
+
         jMenu1.setText("Cadastros");
 
+        jMenu3.setIcon(new javax.swing.ImageIcon("/home/mrx/Downloads/multiple-users-silhouette (2).png")); // NOI18N
         jMenu3.setText("Usuários");
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setIcon(new javax.swing.ImageIcon("/home/mrx/Downloads/student.png")); // NOI18N
         jMenuItem1.setText("Aluno");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +88,8 @@ public class IUPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem1);
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem2.setIcon(new javax.swing.ImageIcon("/home/mrx/Downloads/wise.png")); // NOI18N
         jMenuItem2.setText("Professor");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,7 +100,14 @@ public class IUPrincipal extends javax.swing.JFrame {
 
         jMenu1.add(jMenu3);
 
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem3.setIcon(new javax.swing.ImageIcon("/home/mrx/Downloads/books.png")); // NOI18N
         jMenuItem3.setText("Livros");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
@@ -103,12 +125,27 @@ public class IUPrincipal extends javax.swing.JFrame {
         jMenu4.setText("Relatórios");
 
         jMenuItem6.setText("Todos Usuários");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem6);
 
         jMenuItem7.setText("Todos Alunos");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem7);
 
         jMenuItem8.setText("Todos Professores");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem8);
 
         jMenuItem17.setText("Todos Livros já Emprestados para um Usuário");
@@ -178,11 +215,11 @@ public class IUPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 501, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 371, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
         );
 
         pack();
@@ -212,17 +249,90 @@ public class IUPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       IUCAluno iu = IUCAluno.getInstancia(this, biblio);  
+       IUCAluno iu = new IUCAluno(this, true, biblio);  
        iu.setLocationRelativeTo(null);
        iu.setVisible(true);       
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        IUCProfessor iu = IUCProfessor.getInstancia(this, biblio);  
+        IUCProfessor iu = new IUCProfessor(this, true, biblio);  
         iu.setLocationRelativeTo(null);
         iu.setVisible(true); 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        IUCLivro iu = new IUCLivro(this, true, biblio);  
+        iu.setLocationRelativeTo(null);
+        iu.setVisible(true); 
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        relAUsuarios();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        relAlunos();
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        relProfessor();
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    
+    private void relAUsuarios(){
+        String print = "";
+        for(int i = 0; i < biblio.getUsuarios().size(); i++){
+            if(biblio.getUsuarios().get(i) instanceof Aluno){
+                Aluno al = (Aluno)biblio.getUsuarios().get(i);
+                print += "=======================================";
+                print += "\nCod. usuário: " + al.getCodUsuario();
+                print += "\nNome: " + al.getNome();
+                print += "\nCurso: " + al.getCurso();
+                print += "\nAno: " + al.getAno();
+                print += "\n=======================================\n\n";
+            }
+            else{
+                Professor pf = (Professor)biblio.getUsuarios().get(i);
+                print += "=======================================";
+                print += "\nCod. usuário: " + pf.getCodUsuario();
+                print += "\nNome: " + pf.getNome();
+                print += "\nTitulação: " + pf.getTitulacao();                
+                print += "\n=======================================\n\n";
+            }
+        }        
+        this.jTextArea1.setText(print);
+    }
+    
+    private void relAlunos(){
+        String print = "";
+        for(int i = 0; i < biblio.getUsuarios().size(); i++){
+            if(biblio.getUsuarios().get(i) instanceof Aluno){
+                Aluno al = (Aluno)biblio.getUsuarios().get(i);
+                print += "=======================================";
+                print += "\nCod. usuário: " + al.getCodUsuario();
+                print += "\nNome: " + al.getNome();
+                print += "\nCurso: " + al.getCurso();
+                print += "\nAno: " + al.getAno();
+                print += "\n=======================================\n\n";
+            }            
+        }        
+        this.jTextArea1.setText(print);
+    }
+    
+    private void relProfessor(){
+        String print = "";
+        for(int i = 0; i < biblio.getUsuarios().size(); i++){
+            if(biblio.getUsuarios().get(i) instanceof Professor){
+                Professor pf = (Professor)biblio.getUsuarios().get(i);
+                print += "=======================================";
+                print += "\nCod. usuário: " + pf.getCodUsuario();
+                print += "\nNome: " + pf.getNome();
+                print += "\nTitulação: " + pf.getTitulacao();                
+                print += "\n=======================================\n\n";
+            }            
+        }        
+        this.jTextArea1.setText(print);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -258,8 +368,10 @@ public class IUPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

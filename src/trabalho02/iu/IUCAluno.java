@@ -15,23 +15,16 @@ import trabalho02.modelo.Biblioteca;
  * @author mrx
  */
 public class IUCAluno extends javax.swing.JDialog {
-    private static IUCAluno instancia = null; ///padrão Singleton
     private Biblioteca bibli;
     /**
      * Creates new form IUCCliente
      */
-    private IUCAluno(java.awt.Frame parent, boolean modal, Biblioteca bibli) {
+    public IUCAluno(java.awt.Frame parent, boolean modal, Biblioteca bibli) {
         super(parent, modal);
         this.bibli = bibli;
         initComponents();
     }
-    
-    public static IUCAluno getInstancia(JFrame parent, Biblioteca bibli){
-        if (instancia == null){
-            instancia = new IUCAluno(parent, true, bibli);
-        }
-        return instancia;
-    }
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -278,8 +271,8 @@ public class IUCAluno extends javax.swing.JDialog {
     }
     
     private void gravarAluno(){
-        this.bibli.addAluno(jTextField3.getText(), jTextField2.getText(), jTextField1.getText(), Integer.parseInt(String.valueOf(jSpinner1.getValue())));
-        JOptionPane.showMessageDialog(null, "Aluno inserido com sucesso!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+        if(this.bibli.addAluno(jTextField3.getText(), jTextField2.getText(), jTextField1.getText(), Integer.parseInt(String.valueOf(jSpinner1.getValue()))))
+            JOptionPane.showMessageDialog(null, "Aluno inserido com sucesso!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

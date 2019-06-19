@@ -57,4 +57,28 @@ public class Database {
     public ArrayList<Usuario> getUsuarios(){
         return usuarios;
     }
+    
+    public Livro getLivro(String codLivro){
+        for(int i =0; i < livros.size(); i++){
+            if(livros.get(i).getCodLivro().equals(codLivro))
+                return livros.get(i);
+        }
+        return null;
+    }
+    
+    public ArrayList<Livro> getLivros(){
+        return livros;
+    }
+    
+    public Emprestimo getEmprestimo(String codEmprestimo){
+        for(int i =0; i < emprestimos.size(); i++){
+            if(emprestimos.get(i).getCodEmprestimo().equals(codEmprestimo))
+                return emprestimos.get(i);
+        }
+        return null;
+    }
+    
+    public ArrayList<Emprestimo> getEmprestimos(){
+        return emprestimos;
+    }
 }

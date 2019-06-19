@@ -4,6 +4,7 @@
  */
 package trabalho02.modelo;
 
+import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import trabalho02.dados.Database;
@@ -32,60 +33,76 @@ public class Biblioteca {
         this.configuracoes = configuracoes;
     }
 
-    public void addAluno(String codUsuario, String nome, String curso, int ano){
+    public boolean addAluno(String codUsuario, String nome, String curso, int ano){
         if(codUsuario.equals("") || nome.equals("") || curso.equals("")){
             JOptionPane.showMessageDialog(null, "Certifique-se de que todos os campos estão preenchidos.", "Entrada inválida.",  JOptionPane.ERROR_MESSAGE);
-            return;
+            return false;
         }
         if(ano <= 0){
             JOptionPane.showMessageDialog(null, "O ano deve ser superior a zero.", "Entrada inválida.", JOptionPane.ERROR_MESSAGE);
-            return;
+            return false;
         }
         
         for(int i = 0; i < db.getUsuarios().size(); i++){
             if(db.getUsuarios().get(i).getCodUsuario().equals(codUsuario)){
                 JOptionPane.showMessageDialog(null, "Já existe um usuário com esse código.", "Entrada duplicada.", JOptionPane.ERROR_MESSAGE);
-                return;
+                return false;
             }
         }
         
         Aluno aluno = new Aluno(codUsuario, nome, curso, ano, configuracoes.getDiasAluno());
         db.addUsuario(aluno);
+        return true;
     }
 
-    public void addProfessor(String codUsuario, String nome, String titulacao){
+    public boolean addProfessor(String codUsuario, String nome, String titulacao){
         if(codUsuario.equals("") || nome.equals("") || titulacao.equals("")){
             JOptionPane.showMessageDialog(null, "Certifique-se de que todos os campos estão preenchidos.", "Entrada inválida.", JOptionPane.ERROR_MESSAGE);
-            return;
+            return false;
         }
         
         for(int i = 0; i < db.getUsuarios().size(); i++){
             if(db.getUsuarios().get(i).getCodUsuario().equals(codUsuario)){
                 JOptionPane.showMessageDialog(null, "Já existe um usuário com esse código.", "Entrada duplicada.", JOptionPane.ERROR_MESSAGE);
-                return;
+                return false;
             }
         }
+        
         Professor professor = new Professor(codUsuario, nome, titulacao, configuracoes.getDiasProfessor());
         db.addUsuario(professor);
+        return true;
     }
 
-    public void addLivro(String codLivro, String nome, int ano) {
+    public boolean addLivro(String codLivro, String nome, int ano) {
         if(codLivro.equals("") || nome.equals("")){
             JOptionPane.showMessageDialog(null, "Certifique-se de que todos os campos estão preenchidos.", "Entrada inválida.", JOptionPane.ERROR_MESSAGE);
-            return;
+            return false;
         }
         if(ano <= 0){
             JOptionPane.showMessageDialog(null, "O ano deve ser superior a zero.", "Entrada inválida.",  JOptionPane.ERROR_MESSAGE);
-            return;
+            return false;
         }
-        for(int i = 0; i < db.getUsuarios().size(); i++){
-            if(db.getUsuarios().get(i).getCodUsuario().equals(codLivro)){
+        for(int i = 0; i < db.getLivros().size(); i++){
+            if(db.getLivros().get(i).getCodLivro().equals(codLivro)){
                 JOptionPane.showMessageDialog(null, "Já existe um livro com esse código.", "Entrada duplicada.",  JOptionPane.ERROR_MESSAGE);
-                return;
+                return false;
             }
         }
         Livro livro = new Livro(codLivro, nome, ano);
         db.addLivro(livro);
+        return true;
+    }
+    
+    public ArrayList<Usuario> getUsuarios(){
+        return db.getUsuarios();
+    }
+    
+    public ArrayList<Livro> getLivros(){
+        return db.getLivros();
+    }
+    
+    public ArrayList<Emprestimo> getEmprestimos(){
+        return db.getEmprestimos();
     }
 
     

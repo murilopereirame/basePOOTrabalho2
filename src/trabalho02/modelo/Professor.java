@@ -16,5 +16,13 @@ public class Professor extends Usuario{
         super(codUsuario, nome, dias); //emprestimo por X dias
         this.titulacao = titulacao;
     }
+    
+    public void setTitulacao(String tit){
+        this.titulacao = tit;
+    }
+    
+    public String getTitulacao(){
+        return this.titulacao;
+    }
 
 }

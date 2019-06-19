@@ -14,22 +14,14 @@ import trabalho02.modelo.Biblioteca;
  * @author WILLIANSOTOCORNOMEND
  */
 public class IUCProfessor extends javax.swing.JDialog {
-    private static IUCProfessor instancia = null; ///padrão Singleton
     private Biblioteca bibli;
     /**
      * Creates new form IUCProfessor
      */
-    private IUCProfessor(java.awt.Frame parent, boolean modal, Biblioteca bibli) {
+    public IUCProfessor(java.awt.Frame parent, boolean modal, Biblioteca bibli) {
         super(parent, modal);
-                this.bibli = bibli;
+        this.bibli = bibli;
         initComponents();
-    }
-    
-    public static IUCProfessor getInstancia(JFrame parent, Biblioteca bibli){
-        if (instancia == null){
-            instancia = new IUCProfessor(parent, true, bibli);
-        }
-        return instancia;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -206,8 +198,8 @@ public class IUCProfessor extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField3FocusLost
     
     private void cadastrarProfessor(){
-        this.bibli.addProfessor(jTextField1.getText(), jTextField2.getText(), jTextField3.getText());
-        JOptionPane.showMessageDialog(null, "Professor inserido com sucesso!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+        if(this.bibli.addProfessor(jTextField1.getText(), jTextField2.getText(), jTextField3.getText()))
+            JOptionPane.showMessageDialog(null, "Professor inserido com sucesso!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
     }
     
     /**
