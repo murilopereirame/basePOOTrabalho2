@@ -76,6 +76,11 @@ public class IUPrincipal extends javax.swing.JFrame {
         jMenu3.add(jMenuItem1);
 
         jMenuItem2.setText("Professor");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem2);
 
         jMenu1.add(jMenu3);
@@ -207,10 +212,16 @@ public class IUPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       IUCAluno iu = new IUCAluno(biblio);  
+       IUCAluno iu = IUCAluno.getInstancia(this, biblio);  
        iu.setLocationRelativeTo(null);
        iu.setVisible(true);       
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        IUCProfessor iu = IUCProfessor.getInstancia(this, biblio);  
+        iu.setLocationRelativeTo(null);
+        iu.setVisible(true); 
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
