@@ -165,9 +165,19 @@ public class IUPrincipal extends javax.swing.JFrame {
         jMenu4.add(jMenuItem9);
 
         jMenuItem10.setText("Livros Disponíveis");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem10);
 
         jMenuItem11.setText("Livros Emprestados");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem11);
         jMenu4.add(jSeparator2);
 
@@ -278,6 +288,14 @@ public class IUPrincipal extends javax.swing.JFrame {
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         relProfessor();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        relELivros();
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        relDLivros();
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
     
     private void relAUsuarios(){
         String print = "";
@@ -347,6 +365,38 @@ public class IUPrincipal extends javax.swing.JFrame {
                 else
                     print += "\nEmprestado: não";
                 print += "\n=======================================\n\n";                        
+        }        
+        this.jTextArea1.setText(print);
+    }
+    
+    private void relDLivros(){
+        String print = "";
+        for(int i = 0; i < biblio.getLivros().size(); i++){
+                Livro lv = (Livro)biblio.getLivros().get(i);
+                if(!lv.estaEmprestado()){
+                    print += "=======================================";
+                    print += "\nCod. livro: " + lv.getCodLivro();
+                    print += "\nNome: " + lv.getNome();
+                    print += "\nAno: " + lv.getAno();    
+                    print += "\nEmprestado: não";
+                    print += "\n=======================================\n\n";                        
+                }
+        }        
+        this.jTextArea1.setText(print);
+    }
+    
+    private void relELivros(){
+        String print = "";
+        for(int i = 0; i < biblio.getLivros().size(); i++){
+                Livro lv = (Livro)biblio.getLivros().get(i);
+                if(lv.estaEmprestado()){
+                    print += "=======================================";
+                    print += "\nCod. livro: " + lv.getCodLivro();
+                    print += "\nNome: " + lv.getNome();
+                    print += "\nAno: " + lv.getAno();    
+                    print += "\nEmprestado: sim";
+                    print += "\n=======================================\n\n";                        
+                }
         }        
         this.jTextArea1.setText(print);
     }
