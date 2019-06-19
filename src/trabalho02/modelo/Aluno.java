@@ -18,4 +18,20 @@ public class Aluno extends Usuario {
         this.curso = curso;
         this.ano = ano;
     }
+    
+    public void setCurso(String curso){
+        this.curso = curso;
+    }
+    
+    public String getCurso(){
+        return this.curso;
+    }
+    
+    public void setAno(int ano){
+        this.ano = ano;
+    }
+    
+    public int getAno(){
+        return this.ano;
+    }
 }

@@ -5,6 +5,8 @@
  */
 package trabalho02.dados;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import trabalho02.modelo.Emprestimo;
 import trabalho02.modelo.Livro;
 import trabalho02.modelo.Usuario;
@@ -15,23 +17,14 @@ import trabalho02.modelo.Usuario;
  */
 public class Database {
     private static Database instancia;
-    private Usuario usuarios[];
-    private Emprestimo emprestimos[];
-    private Livro livros[];
-    private static final int MAX_USUARIO = 1000;
-    private static final int MAX_EMPRESTIMO = 1000;
-    private static final int MAX_LIVRO = 1000;
-    private int contU; //contador de usuarios
-    private int contE; //contador de emprestimos
-    private int contL; //contador de livros
+    private ArrayList<Usuario> usuarios;
+    private ArrayList<Emprestimo> emprestimos;
+    private ArrayList<Livro> livros;  
 
     public Database() {
-        this.usuarios = new Usuario[MAX_USUARIO];
-        this.emprestimos = new Emprestimo[MAX_EMPRESTIMO];
-        this.livros = new Livro[MAX_LIVRO];
-        contU = 0;
-        contE = 0;
-        contL = 0;
+        this.usuarios = new ArrayList<Usuario>();
+        this.emprestimos = new ArrayList<Emprestimo>();
+        this.livros = new ArrayList<Livro>();        
     }
     
     public static Database getInstance(){
@@ -41,17 +34,27 @@ public class Database {
         return instancia;
     }
     
-    public void addUsuario(Usuario u){
-        if (contU < MAX_USUARIO ){
-            usuarios[contU] = u;
-            contU++;
-        }
+    public void addUsuario(Usuario u){        
+        usuarios.add(u);
     }
     
     public void addLivro(Livro l){
-        if (contL < MAX_LIVRO ){
-            livros[contL] = l;
-            contL++;
+        livros.add(l);
+    }
+    
+    public void addEmprestimo(Emprestimo e){
+        emprestimos.add(e);
+    }
+    
+    public Usuario getUsuario(String codUsuario){
+        for(int i =0; i < usuarios.size(); i++){
+            if(usuarios.get(i).getCodUsuario().equals(codUsuario))
+                return usuarios.get(i);
         }
+        return null;
+    }
+    
+    public ArrayList<Usuario> getUsuarios(){
+        return usuarios;
     }
 }

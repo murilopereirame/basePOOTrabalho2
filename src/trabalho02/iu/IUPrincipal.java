@@ -11,13 +11,14 @@
 package trabalho02.iu;
 
 import trabalho02.controlador.Controlador;
+import trabalho02.modelo.Biblioteca;
 
 /**
  *
  * @author Danilo Medeiros Eler
  */
 public class IUPrincipal extends javax.swing.JFrame {
-
+    private Biblioteca biblio = new Biblioteca();
     /** Creates new form IUPrincipal */
     public IUPrincipal() {
         initComponents();
@@ -183,10 +184,9 @@ public class IUPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
-        // TODO add your handling code here:
-        Controlador control = new Controlador();
+        // TODO add your handling code here:        
         IUConfig iuConfig = IUConfig.getInstancia(this);
-        iuConfig.exibir(control.getConfiguracoes());
+        iuConfig.exibir(biblio.getConfiguracoes());
 
         //alternativamente, podemos chamar assim:
         //IUConfig.getInstancia(this).exibir(biblioteca.getConfiguracoes());
@@ -207,7 +207,8 @@ public class IUPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       IUCAluno iu = new IUCAluno();       
+       IUCAluno iu = new IUCAluno(biblio);  
+       iu.setLocationRelativeTo(null);
        iu.setVisible(true);       
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -216,7 +217,6 @@ public class IUPrincipal extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
-
             public void run() {
                 new IUPrincipal().setVisible(true);
             }
