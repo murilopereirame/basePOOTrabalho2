@@ -5,6 +5,7 @@
  */
 package trabalho02.iu;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import trabalho02.modelo.Aluno;
 import trabalho02.modelo.Biblioteca;
@@ -19,11 +20,18 @@ public class IUCAluno extends javax.swing.JDialog {
     /**
      * Creates new form IUCCliente
      */
-    public IUCAluno(Biblioteca bibli) {
+    private IUCAluno(java.awt.Frame parent, boolean modal, Biblioteca bibli) {
+        super(parent, modal);
         this.bibli = bibli;
         initComponents();
     }
     
+    public static IUCAluno getInstancia(JFrame parent, Biblioteca bibli){
+        if (instancia == null){
+            instancia = new IUCAluno(parent, true, bibli);
+        }
+        return instancia;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -264,7 +272,7 @@ public class IUCAluno extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {                
-                new IUCAluno(null).setVisible(true);                
+                new IUCAluno(null, true, null).setVisible(true);                
             }
         });
     }
