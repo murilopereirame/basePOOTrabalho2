@@ -27,22 +27,16 @@ public class Usuario implements Serializable {
         return diasEmprestimo;
     }
 
-    public void setDiasEmprestimo(int diasEmprestimo) {
-        if(diasEmprestimo > 0 )
-            this.diasEmprestimo = diasEmprestimo;
-        else
-            throw new IllegalArgumentException("A quantidade de dias deve ser maior do que zero!");
+    public void setDiasEmprestimo(int diasEmprestimo) {        
+        this.diasEmprestimo = diasEmprestimo;        
     }
 
     public String getCodUsuario() {
         return codUsuario;
     }
 
-    public void setCodUsuario(String codUsuario) {
-        if(codUsuario != "")
-            this.codUsuario = codUsuario;
-        else
-            throw new IllegalArgumentException("O código do usuário não pode ser vazio!");
+    public void setCodUsuario(String codUsuario) {        
+        this.codUsuario = codUsuario;        
     }
 
     public String getNome() {
@@ -50,9 +44,6 @@ public class Usuario implements Serializable {
     }
 
     public void setNome(String nome) {
-        if(nome != "")
-            this.nome = nome;
-        else
-            throw new IllegalArgumentException("O nome do usuário não pode ser vazio!");
+        this.nome = nome;        
     }    
 }
