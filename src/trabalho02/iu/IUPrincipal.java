@@ -13,6 +13,7 @@ package trabalho02.iu;
 import trabalho02.controlador.Controlador;
 import trabalho02.modelo.Aluno;
 import trabalho02.modelo.Biblioteca;
+import trabalho02.modelo.Livro;
 import trabalho02.modelo.Professor;
 
 /**
@@ -245,7 +246,7 @@ public class IUPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        // TODO add your handling code here:
+        relTLivros();
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -329,6 +330,23 @@ public class IUPrincipal extends javax.swing.JFrame {
                 print += "\nTitulação: " + pf.getTitulacao();                
                 print += "\n=======================================\n\n";
             }            
+        }        
+        this.jTextArea1.setText(print);
+    }
+    
+    private void relTLivros(){
+        String print = "";
+        for(int i = 0; i < biblio.getLivros().size(); i++){
+                Livro lv = (Livro)biblio.getLivros().get(i);
+                print += "=======================================";
+                print += "\nCod. livro: " + lv.getCodLivro();
+                print += "\nNome: " + lv.getNome();
+                print += "\nAno: " + lv.getAno();    
+                if(lv.estaEmprestado())
+                    print += "\nEmprestado: sim";
+                else
+                    print += "\nEmprestado: não";
+                print += "\n=======================================\n\n";                        
         }        
         this.jTextArea1.setText(print);
     }
