@@ -10,11 +10,14 @@
  */
 package trabalho02.iu;
 
+import java.util.Calendar;
 import trabalho02.controlador.Controlador;
 import trabalho02.modelo.Aluno;
 import trabalho02.modelo.Biblioteca;
+import trabalho02.modelo.Emprestimo;
 import trabalho02.modelo.Livro;
 import trabalho02.modelo.Professor;
+import trabalho02.modelo.Usuario;
 
 /**
  *
@@ -115,9 +118,16 @@ public class IUPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Movimentação");
 
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem4.setText("Empréstimo");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem5.setText("Devolução");
         jMenu2.add(jMenuItem5);
 
@@ -200,6 +210,7 @@ public class IUPrincipal extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem14);
 
+        jMenuItem15.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem15.setText("Carregar Dados");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -290,12 +301,19 @@ public class IUPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        relELivros();
+         relALivros();
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         relDLivros();
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+       
+        IUEmprestimo iu = new IUEmprestimo(this, true, biblio.getUsuarios(), biblio.getLivros(), biblio);
+        iu.setLocationRelativeTo(null);
+        iu.setVisible(true); 
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
     
     private void relAUsuarios(){
         String print = "";
@@ -397,6 +415,30 @@ public class IUPrincipal extends javax.swing.JFrame {
                     print += "\nEmprestado: sim";
                     print += "\n=======================================\n\n";                        
                 }
+        }        
+        this.jTextArea1.setText(print);
+    }
+    
+    private void relALivros(){
+        String print = "";
+        for(int i = 0; i < biblio.getEmprestimos().size(); i++){            
+            Emprestimo lm = (Emprestimo)biblio.getEmprestimos().get(i);                                    
+            if(lm.getDataDevolucao().get(Calendar.DATE) < Calendar.getInstance().get(Calendar.DATE)){
+                for(int k = 0; i < lm.getItens().size(); k++){
+                    Livro lv = (Livro)biblio.getLivros().get(k);
+                    if(lv.estaEmprestado()){
+                        print += "=======================================";
+                        print += "\nCod. livro: " + lv.getCodLivro();
+                        print += "\nNome: " + lv.getNome();
+                        print += "\nAno: " + lv.getAno();    
+                        print += "\nEmprestado: sim";
+                        print += "\nAtrasado: " + (Calendar.getInstance().get(Calendar.DATE) - lm.getDataDevolucao().get(Calendar.DATE));
+                        print += "\n=======================================\n\n";                        
+                    }
+                }
+         
+            }            
+                
         }        
         this.jTextArea1.setText(print);
     }

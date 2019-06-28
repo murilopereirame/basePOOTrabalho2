@@ -104,6 +104,14 @@ public class Biblioteca {
     public ArrayList<Emprestimo> getEmprestimos(){
         return db.getEmprestimos();
     }
+    
+    public void fazEmprestimo(Emprestimo em){
+        db.addEmprestimo(em);
+    }
+    
+    public void fazDevolucao(Emprestimo em){
+        //
+    }
 
     
 
