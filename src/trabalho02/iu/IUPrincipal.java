@@ -79,11 +79,9 @@ public class IUPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Cadastros");
 
-        jMenu3.setIcon(new javax.swing.ImageIcon("/home/mrx/Downloads/multiple-users-silhouette (2).png")); // NOI18N
         jMenu3.setText("Usuários");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setIcon(new javax.swing.ImageIcon("/home/mrx/Downloads/student.png")); // NOI18N
         jMenuItem1.setText("Aluno");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,7 +91,6 @@ public class IUPrincipal extends javax.swing.JFrame {
         jMenu3.add(jMenuItem1);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem2.setIcon(new javax.swing.ImageIcon("/home/mrx/Downloads/wise.png")); // NOI18N
         jMenuItem2.setText("Professor");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,7 +102,6 @@ public class IUPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenu3);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem3.setIcon(new javax.swing.ImageIcon("/home/mrx/Downloads/books.png")); // NOI18N
         jMenuItem3.setText("Livros");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,9 +188,19 @@ public class IUPrincipal extends javax.swing.JFrame {
         jMenu4.add(jSeparator2);
 
         jMenuItem12.setText("Livros com Atraso");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem12);
 
         jMenuItem13.setText("Usuários com Atraso");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem13);
 
         jMenuBar1.add(jMenu4);
@@ -301,7 +307,7 @@ public class IUPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-         relALivros();
+         relELivros();
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
@@ -314,6 +320,14 @@ public class IUPrincipal extends javax.swing.JFrame {
         iu.setLocationRelativeTo(null);
         iu.setVisible(true); 
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        relALivros();
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        relAtUsuarios(); 
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
     
     private void relAUsuarios(){
         String print = "";
@@ -423,8 +437,8 @@ public class IUPrincipal extends javax.swing.JFrame {
         String print = "";
         for(int i = 0; i < biblio.getEmprestimos().size(); i++){            
             Emprestimo lm = (Emprestimo)biblio.getEmprestimos().get(i);                                    
-            if(lm.getDataDevolucao().get(Calendar.DATE) < Calendar.getInstance().get(Calendar.DATE)){
-                for(int k = 0; i < lm.getItens().size(); k++){
+            if(lm.getDataDevolucao().compareTo(Calendar.getInstance()) < 0){ //PERGUNTAR PARA O MUUURILO
+                for(int k = 0; k < lm.getItens().size(); k++){
                     Livro lv = (Livro)biblio.getLivros().get(k);
                     if(lv.estaEmprestado()){
                         print += "=======================================";
@@ -443,6 +457,42 @@ public class IUPrincipal extends javax.swing.JFrame {
         this.jTextArea1.setText(print);
     }
     
+    private void relAtUsuarios(){
+        String print = "";
+        System.out.println("");
+        for (int i = 0; i < biblio.getEmprestimos().size(); i++){
+            Emprestimo lm = (Emprestimo)biblio.getEmprestimos().get(i);
+            if(lm.getDataDevolucao().compareTo(Calendar.getInstance())< 0){
+                for (int j = 0; j <= biblio.getUsuarios().size(); j++){
+                     if(biblio.getUsuarios().get(j) instanceof Aluno){
+                        Aluno al = (Aluno)biblio.getUsuarios().get(j);
+                            if (al.getCodUsuario().equals(lm.getCodUsuario())){
+                                print += "=======================================";
+                                print += "\nCod. usuário: " + al.getCodUsuario();
+                                print += "\nNome: " + al.getNome();
+                                print += "\nCurso: " + al.getCurso();
+                                print += "\nAno: " + al.getAno();
+                                print += "\n=======================================\n\n";
+                            }
+                        
+                            else{
+                                Professor pf = (Professor)biblio.getUsuarios().get(j);
+                               if ( pf.getCodUsuario().equals(lm.getCodUsuario())){
+                                     print += "=======================================";
+                                     print += "\nCod. usuário: " + pf.getCodUsuario();
+                                     print += "\nNome: " + pf.getNome();
+                                     print += "\nTitulação: " + pf.getTitulacao();                
+                                     print += "\n=======================================\n\n";
+                                }
+                            }
+                    }
+            
+                }
+            
+            }    
+        }
+        this.jTextArea1.setText(print);
+    }
     /**
      * @param args the command line arguments
      */

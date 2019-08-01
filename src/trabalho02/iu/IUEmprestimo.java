@@ -128,12 +128,12 @@ public class IUEmprestimo extends javax.swing.JDialog {
         for(int i = 0; i < this.jList1.getSelectedIndices().length; i++){
             System.out.println(livros.get(i).getNome());
             livros.get(i).setEmprestado(true);
-            Item it = new Item(em.getCodEmprestimo(), livros.get(i).getCodLivro());            
+            Item it = new Item(em.getCodEmprestimo(), livros.get(i).getCodLivro());  //arrumar emprestimo          
             itens.add(it);            
         }        
         em.setItens(itens);        
         bibli.fazEmprestimo(em);         
-        JOptionPane.showMessageDialog(null, "Emprestimmo feito com sucesso!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Emprestimo feito com sucesso!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
